@@ -11,7 +11,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='w-full shadow-lg bg-white'>
+        <div className='w-full shadow-lg bg-white fixed z-50'>
             <div className='flex justify-between items-center p-5 md:px-10'>
                 {/* Logo */}
                 <Link to='/' className='text-3xl font-bold cursor-pointer'>
