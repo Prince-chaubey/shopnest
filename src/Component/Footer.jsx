@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className='w-[full] bg-black p-10 grid gap-5 grid-cols-2 md:grid-cols-4'>
         <div className='m-5'>
-        <p className='text-2xl font-semibold text-white'>Mech<span className='text-orange-500'>Shop</span></p>
+        <p className='text-2xl font-semibold text-white'>Shop<span className='text-orange-500'>Nest</span></p>
         <p className='text-white text-xl'>© 2024 Bundl Technologies Pvt. Ltd</p>
         </div>
 
