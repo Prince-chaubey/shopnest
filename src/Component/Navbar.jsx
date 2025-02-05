@@ -1,42 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-    const [Navbar,setNavbar]=useState(false);
-    const ShowNavbar=()=>{
-         setNavbar(!Navbar)
-    }
-    
-  return (
-    <div className='flex gap-2 text-2xl justify-between font-semibold p-[20px] border-white shadow-lg relative w-full'>
-        <p className='font-bold cursor-pointer'>Shop<span className='text-orange-600'>Nest</span></p>
+    const [navbarOpen, setNavbarOpen] = useState(false);
 
-        <ul className='sm:flex gap-[20px] hidden'>
-            <li className='cursor-pointer'>Home</li>
-            <li className='cursor-pointer'>All Products</li>
-            <li className='cursor-pointer'>Mens</li>
-            <li className='cursor-pointer'>Kids</li>
-        </ul>
-        {
-            Navbar?(<div className='absolute bg-white  top-[70px] left-[0px] w-full text-center flex justify-center items-center text-2xl'>
-                <ul className='mt-[100px]'>
-                    <li className='m-[40px] text-3xl cursor-pointer'>Home</li>
-                    <li className='m-[40px] text-3xl cursor-pointer'>All Products</li>
-                    <li className='m-[40px] text-3xl cursor-pointer'>Mens</li>
-                    <li className='m-[40px] text-3xl cursor-pointer'>Kids</li>
+    const toggleNavbar = () => {
+        setNavbarOpen(!navbarOpen);
+    };
+
+    return (
+        <div className='w-full shadow-lg bg-white'>
+            <div className='flex justify-between items-center p-5 md:px-10'>
+                {/* Logo */}
+                <Link to='/' className='text-3xl font-bold cursor-pointer'>
+                    Shop<span className='text-orange-600'>Nest</span>
+                </Link>
+
+                {/* Desktop Menu */}
+                <ul className='hidden sm:flex gap-8 text-lg font-semibold'>
+                    <li><Link to='/' className='hover:text-orange-600'>Home</Link></li>
+                    <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
+                    <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
+                    <li><Link to='/kids' className='hover:text-orange-600'>Kids</Link></li>
                 </ul>
-        
-                </div>):""
-        }
-    
-        <div className='flex gap-[20px]'>
-        <FaCartShopping size={30} className='cursor-pointer'/>
-        <RxHamburgerMenu size={30} className='sm:hidden block cursor-pointer' onClick={ShowNavbar}/>
-        </div>
-      
-    </div>
-  )
-}
 
-export default Navbar
+                {/* Right Side Icons */}
+                <div className='flex items-center gap-2'>
+                   <Link to="/login">
+                   <button className='bg-gray-200 px-4 py-1 rounded-md text-lg font-medium hover:bg-gray-300 cursor-pointer'>
+                        Login
+                    </button>
+                   </Link>
+                    <Link to='/cart' >
+                        <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden' />
+                    </Link>
+                    <RxHamburgerMenu
+                        size={30}
+                        className='sm:hidden block cursor-pointer'
+                        onClick={toggleNavbar}
+                    />
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            {navbarOpen && (
+                <div className='absolute top-16 left-0 w-full bg-white text-center shadow-md sm:hidden'>
+                    <ul className='py-6 space-y-6 text-xl font-semibold'>
+                        <li><Link to='/' className='block' onClick={toggleNavbar}>Home</Link></li>
+                        <li><Link to='/allproducts' className='block' onClick={toggleNavbar}>All Products</Link></li>
+                        <li><Link to='/mens' className='block' onClick={toggleNavbar}>Mens</Link></li>
+                        <li><Link to='/kids' className='block' onClick={toggleNavbar}>Kids</Link></li>
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Navbar;

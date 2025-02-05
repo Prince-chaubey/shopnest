@@ -8,7 +8,7 @@ import lappy from "../assets/lappy.webp";
 
 const Gallery = () => {
   return (
-    <div className="py-8">
+    <div className="p-[15px]">
       <section className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-md">
           
