@@ -11,7 +11,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='w-full shadow-lg bg-white fixed z-50'>
+        <div className='w-full shadow-lg bg-white '>
             <div className='flex justify-between items-center p-5 md:px-10'>
                 {/* Logo */}
                 <Link to='/' className='text-3xl font-bold cursor-pointer'>
@@ -19,7 +19,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* Desktop Menu */}
-                <ul className='hidden sm:flex gap-8 text-lg font-semibold'>
+                <ul className='hidden sm:flex gap-8 text-lg '>
                     <li><Link to='/' className='hover:text-orange-600'>Home</Link></li>
                     <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
                     <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
@@ -46,7 +46,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {navbarOpen && (
-                <div className='absolute top-16 left-0 w-full bg-white text-center shadow-md sm:hidden'>
+                <div className='absolute top-16 left-0 w-full  bg-white text-center shadow-md sm:hidden'>
                     <ul className='py-6 space-y-6 text-xl font-semibold'>
                         <li><Link to='/' className='block' onClick={toggleNavbar}>Home</Link></li>
                         <li><Link to='/allproducts' className='block' onClick={toggleNavbar}>All Products</Link></li>
@@ -58,5 +58,6 @@ const Navbar = () => {
         </div>
     );
 };
+
 
 export default Navbar;
