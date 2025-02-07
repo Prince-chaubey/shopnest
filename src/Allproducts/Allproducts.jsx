@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../Layout/Layout';
+import { FaTheRedYeti } from 'react-icons/fa6';
 
 const Allproducts = () => {
   const [allCategory, setAllCategory] = useState([]);
   const [products, setProducts] = useState([]);
+  const [showProducts,setShowProducts]=useState([]);
   const [FilteredCategory,setFilteredCategory]=useState("");
 
   const selectCategory=(category)=>{
@@ -16,8 +18,9 @@ const Allproducts = () => {
     const getAllCategory = async () => {
       try {
         const res = await axios.get('https://dummyjson.com/products/categories');
-        console.log('Categories:', res.data); // Debugging
-        setAllCategory(res.data || []); // Ensure it's an array
+        // console.log(res);
+        // console.log('Categories:', res.data); // Debugging
+        setAllCategory(res.data || []); // Ensuring it is an array or not
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -32,7 +35,7 @@ const Allproducts = () => {
       try {
         const URL=`https://dummyjson.com/products/category/${FilteredCategory}`
         const res = await axios.get(URL);
-        console.log('Products:', res.data); // Debugging
+        // console.log('Products:', res.data); // Debugging
         setProducts(res.data.products || []); // Ensure it's an array
       } catch (error) {
         console.log('Error while fetching products:', error);
@@ -40,22 +43,23 @@ const Allproducts = () => {
     };
     getProducts();
   }, [selectCategory]);
-
   
-
   return (
     <Layout>
       <div className='px-[60px] py-[10px]'>
         {/* Categories Section */}
-      <div className='bg-black text-white flex flex-wrap gap-[15px] m-[15px] p-[10px]'>
+      <div className='bg-gray-100 text-black flex flex-wrap gap-[15px] m-[15px] p-[10px] text-center'>
         <h1 className='text-xl font-bold w-full'>All Categories</h1>
+        <select onChange={(e)=>selectCategory(e.target.value)} className='mx-auto border-2 border-gray-400 rounded-md p-[5px] hover:cursor-pointer text-xl font-semibold'>
         {
-          allCategory.map((category, idx) => (
-            <button key={idx} className='bg-gray-300 text-black p-[10px] rounded-md hover:cursor-pointer' onClick={()=>selectCategory(category.name)}>
+          allCategory.filter((category)=> ["Laptops","Smartphones","Tops","Beauty","Sunglasses"].includes(category.name))
+          .map((category, idx) => (
+            <option key={idx} className='bg-gray-300 text-black p-[10px] rounded-md hover:cursor-pointer' value={category.name}>
               {category.name} {/* Updated to use category.name instead of category */}
-            </button>
+            </option >
           ))
           }
+          </select>
       </div>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
@@ -77,7 +81,8 @@ const Allproducts = () => {
   }
 </div>
 
-      </div>
+
+    </div>
     </Layout>
   );
 };
