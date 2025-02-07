@@ -69,7 +69,7 @@ const Allproducts = () => {
           <div className="mt-4 text-center">
             <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{Product.category}</h3>
             <h2 className="text-gray-900 title-font text-2xl font-semibold">{Product.title}</h2>
-            <p className="mt-1">Rs.{Product.price}</p>
+            <p className="mt-1">${Product.price}</p>
           </div>
         </div>
       );
