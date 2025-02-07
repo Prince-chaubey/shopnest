@@ -51,7 +51,7 @@ const Allproducts = () => {
         <h1 className='text-xl font-bold w-full'>All Categories</h1>
         {
           allCategory.map((category, idx) => (
-            <button key={idx} className='bg-gray-300 text-black p-[10px] rounded-md' onClick={()=>selectCategory(category.name)}>
+            <button key={idx} className='bg-gray-300 text-black p-[10px] rounded-md hover:cursor-pointer' onClick={()=>selectCategory(category.name)}>
               {category.name} {/* Updated to use category.name instead of category */}
             </button>
           ))
