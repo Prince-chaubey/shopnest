@@ -30,7 +30,7 @@ const Cart = ({cart}) => {
                 </div>
                 <div className="flex flex-col justify-between ml-4 flex-grow">
                   <span className="font-bold text-sm">{cartItem.title}</span>
-                  <span className="text-red-500 text-xs">Apple</span>
+                  <span className="text-red-500 text-xs">{cartItem.category}</span>
                   <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                 </div>
               </div>
