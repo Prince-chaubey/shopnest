@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../Layout/Layout';
-import { FaTheRedYeti } from 'react-icons/fa6';
 
-const Allproducts = () => {
+
+const Allproducts = ({handleCart}) => {
+
   const [allCategory, setAllCategory] = useState([]);
   const [products, setProducts] = useState([]);
   const [showProducts,setShowProducts]=useState([]);
@@ -62,11 +63,13 @@ const Allproducts = () => {
           </select>
       </div>
 
+
+   {/*All items*/}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
   {
     products.map((Product, idx) => {
       return (
-        <div key={idx} className='px-[20px] py-[15px] bg-gray-100 rounded-md hover:scale-105 transition-transform duration-300'>
+        <div key={idx} className='px-[20px] py-[15px] bg-gray-100 rounded-md hover:scale-105 transition-transform duration-300 hover:cursor-pointer'>
           <div className='bg-black p-[20px] rounded-lg'>
             <img alt="ecommerce" className="rounded-lg h-[100%] w-[100%]" src={Product.thumbnail}/>
           </div>
@@ -74,6 +77,7 @@ const Allproducts = () => {
             <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{Product.category}</h3>
             <h2 className="text-gray-900 title-font text-2xl font-semibold">{Product.title}</h2>
             <p className="mt-1">${Product.price}</p>
+            <button className='bg-blue-600 p-3 rounded-md m-2 hover:cursor-pointer text-white' onClick={()=>handleCart(Product)}>Add to cart</button>
           </div>
         </div>
       );
