@@ -16,17 +16,17 @@ const Gallery = () => {
           <div className="grid grid-cols-2 gap-4">
             <img
               alt="gallery"
-              className="w-full object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75"
+              className="w-full object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75 cursor-pointer"
               src={shoe}
             />
             <img
               alt="gallery"
-              className="w-full object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
+              className="w-full object-cover cursor-pointer rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
               src={girl}
             />
             <img
               alt="gallery"
-              className="w-full col-span-2 object-cover rounded-lg aspect-[16/9] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75"
+              className="w-full col-span-2 cursor-pointer object-cover rounded-lg aspect-[16/9] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75"
               src={men}
             />
           </div>
@@ -35,17 +35,17 @@ const Gallery = () => {
           <div className="grid grid-cols-2 gap-4">
             <img
               alt="gallery"
-              className="w-full col-span-2 object-cover rounded-lg aspect-[16/9] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
+              className="w-full cursor-pointer col-span-2 object-cover rounded-lg aspect-[16/9] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
               src={stuff}
             />
             <img
               alt="gallery"
-              className="w-full object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75"
+              className="w-full cursor-pointer object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-x-6 hover:scale-75"
               src={beauty}
             />
             <img
               alt="gallery"
-              className="w-full object-cover rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
+              className="w-full object-cover cursor-pointer rounded-lg aspect-[16/10] shadow-xl transition-transform duration-500 ease-in-out hover:skew-y-6 hover:scale-75"
               src={lappy}
             />
           </div>
