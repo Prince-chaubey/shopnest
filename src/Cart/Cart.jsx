@@ -3,7 +3,7 @@ import React from 'react';
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 
-const Cart = ({cart}) => {
+const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalCost}) => {
    
    
   return (
@@ -12,7 +12,7 @@ const Cart = ({cart}) => {
         <div className="w-full md:w-3/4 bg-white px-4 md:px-10 py-10">
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-lg md:text-2xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-lg md:text-2xl">{cart.length} Items</h2>
+            <h2 className="font-semibold text-lg md:text-2xl">{totalItems()} Items</h2>
           </div>
           <div className="flex mt-10 mb-5">
             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
@@ -23,7 +23,7 @@ const Cart = ({cart}) => {
           {
             //Handling all the cart items through map function
             cart.map((cartItem,idx)=>{
-              return <div className="flex items-center hover:bg-gray-100 -mx-4 md:-mx-8 px-4 md:px-6 py-5">
+              return <div className="flex items-center hover:bg-gray-100 -mx-4 md:-mx-8 px-4 md:px-6 py-5" key={idx}>
               <div className="flex w-2/5">
                 <div className="w-20 ">
                   <img className="h-24 object-cover object-center rounded-xl" src={cartItem.thumbnail} alt="" />
@@ -31,13 +31,13 @@ const Cart = ({cart}) => {
                 <div className="flex flex-col justify-between ml-4 flex-grow">
                   <span className="font-bold text-sm">{cartItem.title}</span>
                   <span className="text-red-500 text-xs">{cartItem.category}</span>
-                  <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                  <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs" onClick={()=>handleRemove(cartItem.id)}>Remove</a>
                 </div>
               </div>
               <div className="flex justify-center items-center w-1/5">
-              <FaMinus className='hover:cursor-pointer' size={20} />
+              <FaMinus className='hover:cursor-pointer' size={20} onClick={()=>handleDecrease(cartItem.id)}/>
                 <span className='py-1 border-2 px-5 mx-3'>{cartItem.quantity}</span>
-              <FaPlus size={20} className='hover:cursor-pointer'/>
+              <FaPlus size={20} className='hover:cursor-pointer' onClick={()=>handleIncrease(cartItem.id)}/>
               </div>
               <span className="text-center w-1/5 font-semibold text-sm">Rs.{cartItem.price}</span>
               <span className="text-center w-1/5 font-semibold text-sm">Rs. {cartItem.price*cartItem.quantity}</span>
@@ -59,7 +59,7 @@ const Cart = ({cart}) => {
           <h1 className="font-semibold text-lg md:text-2xl border-b pb-8">Order Summary</h1>
           <div className="flex justify-between mt-10 mb-5">
             <span className="font-semibold text-sm uppercase">Items 3</span>
-            <span className="font-semibold text-sm">590$</span>
+            <span className="font-semibold text-sm">${totalCost()}</span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
@@ -75,7 +75,7 @@ const Cart = ({cart}) => {
           <div className="border-t mt-8">
             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
-              <span>$600</span>
+              <span>${totalCost()+10}</span>
             </div>
             <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
           </div>

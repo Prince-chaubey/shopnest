@@ -3,7 +3,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({totalItems}) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     const toggleNavbar = () => {
@@ -34,7 +34,9 @@ const Navbar = () => {
                     </button>
                    </Link>
                     <Link to='/cart' >
-                        <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden' />
+                        <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
+                        <span className='absolute top-2 ml-3 font-medium'>{totalItems()}</span>
+                        
                     </Link>
                     <RxHamburgerMenu
                         size={30}
