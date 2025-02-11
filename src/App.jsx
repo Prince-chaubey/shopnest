@@ -10,6 +10,32 @@ import Login from './Pages/Login';
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const [promo,setPromo]=useState("");
+  const [Checkoutprice,SetCheckoutprice]=useState();
+  const [error,SetErorr]=useState("");
+
+
+ 
+  //PromoCode handling
+
+  function handlePromo(e){
+    setPromo(e.target.value);
+  }
+
+  //Apply PromoCode
+  function applyPromo(){
+    if(promo==="HHHHH"){
+      SetCheckoutprice(totalCost()*9/10);
+      SetErorr("GOT 10% DISCOUNT");
+      setPromo("");
+    }
+    else{
+    
+      SetCheckoutprice(totalCost())
+    }
+  }
+
+
 
   // Handle adding items to cart
   function handleCart(product) {
@@ -61,6 +87,9 @@ const App = () => {
   function totalCost(){
     return cart.reduce((total,item)=>total+item.price*item.quantity,0);
   }
+  
+
+  
 
   return (
     <BrowserRouter>
@@ -69,7 +98,24 @@ const App = () => {
         <Route path='/' element={<Home/>} />
         <Route 
           path='/cart' 
-          element={<Cart cart={cart} handleDecrease={handleDecrease} handleIncrease={handleIncrease} handleCart={handleCart} totalItems={totalItems} handleRemove={handleRemove} totalCost={totalCost}/>} 
+          element={
+          <Cart
+           cart={cart}
+            handleDecrease={handleDecrease} 
+            handleIncrease={handleIncrease} 
+            handleCart={handleCart}
+            totalItems={totalItems}
+            handleRemove={handleRemove} 
+            totalCost={totalCost}
+            promo={promo}
+            handlePromo={handlePromo}
+            applyPromo={applyPromo}
+            Checkoutprice={Checkoutprice}
+            error={error}
+            />
+          
+          } 
+            
         />
         <Route 
           path='/allproducts' 
