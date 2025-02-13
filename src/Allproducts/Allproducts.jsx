@@ -1,92 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Layout from '../Layout/Layout';
+import React, { useState, useEffect } from "react";
+import Layout from "../Layout/Layout";
+import Filter from "../Filter/Filter";
+import axios from "axios";
 
+const Allproducts = ({ handleCart }) => {
+  const [All, setAll] = useState([]);
 
-const Allproducts = ({handleCart}) => {
-
-  const [allCategory, setAllCategory] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [showProducts,setShowProducts]=useState([]);
-  const [FilteredCategory,setFilteredCategory]=useState("");
-
-  const selectCategory=(category)=>{
-    setFilteredCategory(category);
-  }
-
-  // Fetch all categories
+  // Fetch all products
   useEffect(() => {
-    const getAllCategory = async () => {
+    const getAllProducts = async () => {
       try {
-        const res = await axios.get('https://dummyjson.com/products/categories');
-        // console.log(res);
-        // console.log('Categories:', res.data); // Debugging
-        setAllCategory(res.data || []); // Ensuring it is an array or not
+        const response = await axios.get("https://dummyjson.com/products");
+        setAll(response.data.products);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching products:", error);
       }
     };
-    getAllCategory();
+    getAllProducts();
   }, []);
 
-  // Fetch products of a specific category (e.g., smartphones)
-  useEffect(() => {
-    const getProducts = async () => {
-      if(!FilteredCategory) return;
-      try {
-        const URL=`https://dummyjson.com/products/category/${FilteredCategory}`
-        const res = await axios.get(URL);
-        // console.log('Products:', res.data); // Debugging
-        setProducts(res.data.products || []); // Ensure it's an array
-      } catch (error) {
-        console.log('Error while fetching products:', error);
-      }
-    };
-    getProducts();
-  }, [selectCategory]);
-  
   return (
     <Layout>
-      <div className='px-[60px] py-[10px]'>
-        {/* Categories Section */}
-      <div className='bg-gray-100 text-black flex flex-wrap gap-[15px] m-[15px] p-[10px] text-center'>
-        <h1 className='text-xl font-bold w-full'>All Categories</h1>
-        <select onChange={(e)=>selectCategory(e.target.value)} className='mx-auto border-2 border-gray-400 rounded-md p-[5px] hover:cursor-pointer text-xl font-semibold'>
-        {
-          allCategory.filter((category)=> ["Laptops","Smartphones","Tops","Beauty","Sunglasses"].includes(category.name))
-          .map((category, idx) => (
-            <option key={idx} className='bg-gray-300 text-black p-[10px] rounded-md hover:cursor-pointer' value={category.name}>
-              {category.name} {/* Updated to use category.name instead of category */}
-            </option >
-          ))
-          }
-          </select>
-      </div>
+      <Filter handleCart={handleCart} />
+      
+      {/* Product Grid */}
+      <div className="px-10 py-5">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Explore Our Products
+        </h1>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {All.map((item) => (
+            <div
+              key={item.id}
+              className="p-5 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
+            >
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <img
+                  alt="ecommerce"
+                  className="rounded-lg h-40 w-full object-cover"
+                  src={item.thumbnail}
+                />
+              </div>
 
-   {/*All items*/}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'>
-  {
-    products.map((Product, idx) => {
-      return (
-        <div key={idx} className='px-[20px] py-[15px] bg-gray-100 rounded-md hover:scale-105 transition-transform duration-300 hover:cursor-pointer'>
-          <div className='bg-black p-[20px] rounded-lg'>
-            <img alt="ecommerce" className="rounded-lg h-[100%] w-[100%]" src={Product.thumbnail}/>
-          </div>
-          <div className="mt-4 text-center">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{Product.category}</h3>
-            <h2 className="text-gray-900 title-font text-2xl font-semibold">{Product.title}</h2>
-            <p className="mt-1">${Product.price}</p>
-            <button className='bg-blue-600 p-3 rounded-md m-2 hover:cursor-pointer text-white' onClick={()=>handleCart(Product)}>Add to cart</button>
-          </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-gray-500 text-sm uppercase font-medium">
+                  {item.category}
+                </h3>
+                <h2 className="text-gray-900 text-xl font-semibold mt-1">
+                  {item.title}
+                </h2>
+                <p className="text-lg text-gray-700 font-medium mt-1">
+                  ${item.price}
+                </p>
+
+                <button
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300 shadow-md hover:cursor-pointer"
+                  onClick={() => handleCart(item)}
+                >
+                  Add to Cart 🛒
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      );
-    })
-  }
-</div>
-
-
-    </div>
+      </div>
     </Layout>
   );
 };
