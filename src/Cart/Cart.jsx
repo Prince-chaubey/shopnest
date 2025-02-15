@@ -6,7 +6,7 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
   
    
   return (
-    <div className="container mx-auto mt-10 px-4">
+    <div className="container mx-auto px-4 p-[100px]">
       <div className="flex flex-col md:flex-row shadow-md my-10">
         <div className="w-full md:w-3/4 bg-white px-4 md:px-10 py-10">
           <div className="flex justify-between border-b pb-8">

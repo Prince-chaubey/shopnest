@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import img from "../assets/login.jpg";
-import {app} from "../Firebase/Firebase"
+import { app } from "../Firebase/Firebase.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Sign = () => {
-  //User Signup details
+  // User Signup details
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  //authentication
-  const auth=getAuth(app);
-
-
+  // Authentication
+  const auth = getAuth(app);
+  const [loading, setLoading] = useState(false); // Loader state
   const [errors, setErrors] = useState({});
 
-  const handleChange =(e) => {
+  const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     let validateErrors = { name: "", email: "", password: "" };
     let error = false;
 
@@ -51,32 +51,28 @@ const Sign = () => {
         error = true;
       }
     }
-          
-    //Checking whether error occured while signing or not
+
     if (error) {
       setErrors(validateErrors);
     } else {
+      setLoading(true); // Show loader
       createUserWithEmailAndPassword(auth, user.email, user.password)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        console.log("User signed up:", user);
-        alert(`Signed up successfully!`);
-        setUser({ name: "", email: "", password: "" }); // Clear the form
-        setErrors({});
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert("Signup error:", errorCode, errorMessage);
-        setErrors({ ...errors, firebase: errorMessage }); // Set a general Firebase error
-        // ... (Handle specific Firebase errors if needed) ...
-      });
+        .then((userCredential) => {
+          setLoading(false); // Hide loader
+          toast.success("Signed up successfully!");
+          setUser({ name: "", email: "", password: "" });
+          setErrors({});
+        })
+        .catch((error) => {
+          setLoading(false); // Hide loader
+          toast.error(`Signup error: ${error.message}`);
+          setErrors({ ...errors, firebase: error.message });
+        });
     }
   };
 
   return (
-    <div className="container mx-auto px-5 py-12 flex flex-col items-center">
+    <div className="container mx-auto px-5 py-[100px] flex flex-col items-center">
       {/* Image Section */}
       <div className="w-full max-w-md flex justify-center mb-6">
         <img
@@ -139,13 +135,28 @@ const Sign = () => {
             {errors.password && <span className="text-red-600 text-sm font-medium">{errors.password}</span>}
           </div>
 
-          {/* Sign Up Button */}
+          {/* Sign Up Button with Loader */}
           <button
-            className="w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg cursor-pointer"
+            className="w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg cursor-pointer flex items-center justify-center"
             type="submit"
+            disabled={loading} // Disable button when loading
           >
-            Sign Up
+            {loading ? (
+              <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+            ) : (
+              "Sign Up"
+            )}
           </button>
+
+          <p className="text-gray-600 font-medium mt-3">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500 cursor-pointer font-medium">
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </div>

@@ -21,14 +21,12 @@ const Allproducts = ({ handleCart }) => {
 
   return (
     <Layout>
+      <div className="pt-[100px]">
       <Filter handleCart={handleCart} />
+      </div>
       
       {/* Product Grid */}
-      <div className="px-10 py-5">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Explore Our Products
-        </h1>
-
+      <div className="px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {All.map((item) => (
             <div

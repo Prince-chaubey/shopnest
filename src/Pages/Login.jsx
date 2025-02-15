@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import img from "../assets/login.jpg";
-import { app } from "../Firebase/Firebase"
+import { app } from "../Firebase/Firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  
-  const auth=getAuth(app);
+
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Loader state
+
+  const auth = getAuth(app);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -43,27 +47,26 @@ const Login = () => {
 
     if (error) {
       setErrors(validateErrors);
-    }
-    else {
-      signInWithEmailAndPassword(auth, user.email, user.password) // Corrected
-      .then((userCredential) => {  // Use userCredential
-          const user = userCredential.user; // Access the user
-          alert(`Logged in with: ${user.email}`); // or user.email
+    } else {
+      setLoading(true); // Show loader
+      signInWithEmailAndPassword(auth, user.email, user.password)
+        .then((userCredential) => {
+          setLoading(false); // Hide loader
+          toast.success(`Login successful for ${user.email}`);
           setUser({ email: "", password: "" });
           setErrors({});
-      })
-      .catch((error) => {
-          const errorCode = error.code;
+        })
+        .catch((error) => {
+          setLoading(false); // Hide loader
           const errorMessage = error.message;
-          alert("Login error:", errorCode, errorMessage); // Log for debugging
-          setErrors({ ...errors, firebase: errorMessage }); // Set error in state
-      });
-
+          toast.error(`Login error: ${errorMessage}`);
+          setErrors((prevErrors) => ({ ...prevErrors, firebase: errorMessage }));
+        });
     }
   };
 
   return (
-    <div className="container mx-auto px-5 py-12 flex flex-col items-center">
+    <div className="container mx-auto px-5 pt-[105px] flex flex-col items-center">
       {/* Image Section */}
       <div className="w-full max-w-md flex justify-center mb-6">
         <img
@@ -88,6 +91,7 @@ const Login = () => {
             <input
               id="email"
               name="email"
+              type="email"
               value={user.email}
               onChange={handleChange}
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
@@ -111,13 +115,27 @@ const Login = () => {
             {errors.password && <span className="text-red-600 text-sm font-medium">{errors.password}</span>}
           </div>
 
-          {/* Login Button */}
+          {/* Login Button with Loader */}
           <button
-            className="w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg cursor-pointer"
+            className="w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg cursor-pointer flex items-center justify-center"
             type="submit"
+            disabled={loading} // Disable button when loading
           >
-            Login
+            {loading ? (
+              <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+            ) : (
+              "Login"
+            )}
           </button>
+
+          <span className="text-gray-600 font-medium">New to shopnest? </span>
+          <Link to="/sign">
+            <span className="text-blue-500 cursor-pointer font-medium">Create Account</span>         
+          </Link>
+        
         </form>
       </div>
     </div>

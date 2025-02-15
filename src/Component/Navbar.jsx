@@ -12,7 +12,7 @@ const Navbar = ({totalItems}) => {
     };
 
     return (
-        <div className='w-full shadow-lg bg-white '>
+        <div className='w-full shadow-lg bg-white fixed z-50'>
             <div className='flex justify-between items-center p-5 md:px-10'>
                 {/* Logo */}
                 <Link to='/' className='text-3xl font-bold cursor-pointer'>
@@ -20,7 +20,7 @@ const Navbar = ({totalItems}) => {
                 </Link>
 
                 {/* Desktop Menu */}
-                <ul className='hidden sm:flex gap-8 text-lg '>
+                <ul className='hidden sm:flex text-lg gap-5 font-medium'>
                     <li><Link to='/' className='hover:text-orange-600'>Home</Link></li>
                     <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
                     <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
@@ -35,15 +35,11 @@ const Navbar = ({totalItems}) => {
                         Login
                     </button>
                    </Link>
-                   <Link to="/sign">
-                   <button className='bg-gray-200 px-4 py-1 rounded-md text-lg font-medium hover:bg-gray-300 cursor-pointer'>
-                        SignIn
-                    </button>
-                   </Link>
+                  
 
                     <Link to='/cart' >
                         <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
-                        <span className='absolute top-2 ml-3 font-medium'>{totalItems()}</span>
+                        <span className='absolute top-2 ml-3 font-medium sm:block hidden'>{totalItems()}</span>
                         
                     </Link>
                     <RxHamburgerMenu
