@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Layout from '../Layout/Layout';
+
 
 
 const Filter = ({handleCart}) => {
@@ -54,7 +54,7 @@ const Filter = ({handleCart}) => {
         <h1 className='text-xl font-bold w-full'>All Categories</h1>
         <select onChange={(e)=>selectCategory(e.target.value)} className='mx-auto border-2 border-gray-400 rounded-md p-[5px] hover:cursor-pointer text-xl font-semibold'>
         {
-          allCategory.filter((category)=> ["Laptops","Smartphones","Tops","Sunglasses"].includes(category.name))
+          allCategory.filter((category)=> ["Laptops","Smartphones","Tops","Sunglasses","Groceries"].includes(category.name))
           .map((category, idx) => (
             <option key={idx} className='bg-gray-300 text-black p-[10px] rounded-md hover:cursor-pointer' value={category.name}>
               {category.name} {/* Updated to use category.name instead of category */}

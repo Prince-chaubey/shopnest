@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
+import Sign from '../Pages/Sign';
 
 const Navbar = ({totalItems}) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
@@ -24,6 +25,7 @@ const Navbar = ({totalItems}) => {
                     <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
                     <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
                     <li><Link to='/kids' className='hover:text-orange-600'>Kids</Link></li>
+                    
                 </ul>
 
                 {/* Right Side Icons */}
@@ -33,6 +35,12 @@ const Navbar = ({totalItems}) => {
                         Login
                     </button>
                    </Link>
+                   <Link to="/sign">
+                   <button className='bg-gray-200 px-4 py-1 rounded-md text-lg font-medium hover:bg-gray-300 cursor-pointer'>
+                        SignIn
+                    </button>
+                   </Link>
+
                     <Link to='/cart' >
                         <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
                         <span className='absolute top-2 ml-3 font-medium'>{totalItems()}</span>

@@ -7,6 +7,9 @@ import Cart from './Cart/Cart';
 import Men from './Pages/Men';
 import Kids from './Pages/Kids';
 import Login from './Pages/Login';
+import Sign from './Pages/Sign';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const App = () => {
   const [cart, setCart] = useState([]);
@@ -124,7 +127,9 @@ const App = () => {
         <Route path='/mens' element={<Men />} />
         <Route path='/kids' element={<Kids />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/sign' element={<Sign/>}/>
       </Routes>
+      <Toaster /> 
     </BrowserRouter>
   );
 };
