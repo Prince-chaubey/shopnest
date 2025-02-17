@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalCost,promo,handlePromo,applyPromo,Checkoutprice,error}) => {
   
@@ -38,13 +39,15 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
                 <span className='py-1 border-2 px-5 mx-3'>{cartItem.quantity}</span>
               <FaPlus size={20} className='hover:cursor-pointer' onClick={()=>handleIncrease(cartItem.id)}/>
               </div>
-              <span className="text-center w-1/5 font-semibold text-sm">Rs.{cartItem.price}</span>
-              <span className="text-center w-1/5 font-semibold text-sm">Rs. {Math.ceil(cartItem.price*cartItem.quantity)}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">${cartItem.price}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">${Math.ceil(cartItem.price*cartItem.quantity)}</span>
             </div>
             })
           }
 
           {/* Repeat similar structure for other cart items */}
+
+          <Link to="/allproducts">
 
           <a href="#" className="flex font-semibold text-indigo-600 text-sm mt-10">
             <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
@@ -52,12 +55,14 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
             </svg>
             Continue Shopping
           </a>
+          
+          </Link>
         </div>
 
         <div id="summary" className="w-full md:w-1/4 px-4 md:px-8 py-10">
           <h1 className="font-semibold text-lg md:text-2xl border-b pb-8">Order Summary</h1>
           <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">Items 3</span>
+            <span className="font-semibold text-sm uppercase">Items {totalItems()}</span>
             <span className="font-semibold text-sm">${Math.ceil(totalCost())}</span>
           </div>
           <div>
@@ -76,7 +81,8 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
               {
-              promo.length <= 0 ? (<span>${Math.ceil(totalCost())}</span>):(<span>${Math.ceil(Checkoutprice)}</span>)}
+              promo==="DISCOUNT100" ? (<span>${Math.ceil(Checkoutprice)}</span>):(<span>${Math.ceil(totalCost())}</span>)
+              }
 
             </div>
             <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>

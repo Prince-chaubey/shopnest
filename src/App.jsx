@@ -27,7 +27,7 @@ const App = () => {
 
   //Apply PromoCode
   function applyPromo(){
-    if(promo==="HHHHH"){
+    if(promo==="DISCOUNT100"){
       SetCheckoutprice(totalCost()*9/10);
       SetErorr("GOT 10% DISCOUNT");
       setPromo("");
@@ -52,6 +52,7 @@ const App = () => {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
+    toast.success("Item added to cart");
   }
    //total items
   function totalItems(){
@@ -85,6 +86,7 @@ const App = () => {
       return item.id!==id;
     })
     setCart(updatedCart);
+    toast.success("Item deleted")
   }
   //total price of cart
   function totalCost(){
