@@ -10,7 +10,7 @@ const Navbar = ({totalItems}) => {
     const toggleNavbar = () => {
         setNavbarOpen(!navbarOpen);
     };
-
+    let p=totalItems();
     return (
         <div className='w-full shadow-lg bg-white fixed z-50'>
             <div className='flex justify-between items-center p-5 md:px-10'>
@@ -39,7 +39,10 @@ const Navbar = ({totalItems}) => {
 
                     <Link to='/cart' >
                         <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
-                        <span className='absolute top-2 ml-3 font-medium sm:block hidden'>{totalItems()}</span>
+                        {
+                           
+                           (p!==0?<p className='absolute top-2 ml-1 pl-2 pb-3 font-medium sm:block hidden bg-red-500 text-white rounded-xl w-[25px] h-[25px]'>{totalItems()}</p>:"")
+                        }
                         
                     </Link>
                     <RxHamburgerMenu
