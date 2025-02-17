@@ -6,7 +6,9 @@ import axios from "axios";
 const Allproducts = ({ handleCart }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [searchedItem, setSearchedItem] = useState("");
-  const [isFilter,setIsFilter]=useState(false);
+  const [isFilter, setIsFilter] = useState(false);
+  const [minvalue, setMinvalue] = useState("");
+  const [maxvalue, setMaxvalue] = useState("");
 
   // Fetch all products
   useEffect(() => {
@@ -32,35 +34,84 @@ const Allproducts = ({ handleCart }) => {
     setAllProducts(filteredItems);
   };
 
-  const toggleFilter=()=>{
-    setIsFilter(!isFilter);
-  }
+  const handleMaxPrice = (e) => {
+    setMaxvalue(e.target.value);
+  };
 
+  const handleMinPrice = (e) => {
+    setMinvalue(e.target.value);
+  };
+
+  const toggleFilter = () => {
+    setIsFilter(!isFilter);
+  };
+
+  const handleFilter = () => {
+    const min = parseFloat(minvalue) || 0;
+    const max = parseFloat(maxvalue) || Infinity;
+    const filteredItems = allProducts.filter(
+      (item) => item.price * 87 >= min && item.price * 87 <= max
+    );
+    setAllProducts(filteredItems);
+  };
 
   return (
     <Layout>
-      <div className="pt-24">
-        <div className="text-center mr-4">
-        <button className="bg-gray-200 text-gray-600 px-4 py-3 rounded-md font-medium cursor-pointer" onClick={toggleFilter}>{isFilter?"Hide Filter":"Show Filter"}</button>
-        {isFilter?<Filter handleCart={handleCart} />:""}
+      <div className="pt-24 px-4">
+        {/* Toggle Filter Button */}
+        <div className="text-center">
+          <button
+            className="bg-gray-200 text-gray-600 px-4 py-3 rounded-md font-medium cursor-pointer"
+            onClick={toggleFilter}
+          >
+            {isFilter ? "Hide Filter" : "Show Filter"}
+          </button>
+          {isFilter && <Filter handleCart={handleCart} />}
         </div>
-      </div>
 
-      {/* Search Bar */}
-      <div className="flex justify-center items-center py-6 gap-1">
-        <input
-          type="text"
-          value={searchedItem}
-          onChange={handleOnChange}
-          className="bg-gray-200 px-4 py-2 w-full max-w-md rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Search Item"
-        />
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
+        {/* Search & Filter Section */}
+        <div className="bg-gray-300 my-4 mx-auto max-w-5xl rounded-md p-6">
+          {/* Search Bar */}
+          <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4">
+            <input
+              type="text"
+              value={searchedItem}
+              onChange={handleOnChange}
+              className="bg-gray-200 px-4 py-3 w-full md:w-3/4 max-w-lg rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 font-medium"
+              placeholder="Search Item"
+            />
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
+          </div>
+
+          {/* Price Filter */}
+          <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 mt-4">
+            <input
+              type="text"
+              value={minvalue}
+              onChange={handleMinPrice}
+              className="bg-gray-200 px-4 py-2  text-center text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Minimum Price"
+            />
+            <input
+              type="text"
+              value={maxvalue}
+              onChange={handleMaxPrice}
+              className="bg-gray-200 px-4 py-2 text-center text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Maximum Price"
+            />
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              onClick={handleFilter}
+            >
+              Filter
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Product Grid */}
@@ -87,7 +138,7 @@ const Allproducts = ({ handleCart }) => {
                   {item.title}
                 </h2>
                 <p className="text-lg text-gray-700 font-medium mt-1">
-                  ${item.price}
+                  Rs.{Math.ceil(item.price * 87)}
                 </p>
 
                 <button
@@ -106,4 +157,3 @@ const Allproducts = ({ handleCart }) => {
 };
 
 export default Allproducts;
-  

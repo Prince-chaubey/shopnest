@@ -39,8 +39,8 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
                 <span className='py-1 border-2 px-5 mx-3'>{cartItem.quantity}</span>
               <FaPlus size={20} className='hover:cursor-pointer' onClick={()=>handleIncrease(cartItem.id)}/>
               </div>
-              <span className="text-center w-1/5 font-semibold text-sm">${cartItem.price}</span>
-              <span className="text-center w-1/5 font-semibold text-sm">${Math.ceil(cartItem.price*cartItem.quantity)}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">Rs.{Math.ceil(cartItem.price*87)}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">Rs.{Math.ceil(cartItem.price*cartItem.quantity*87)}</span>
             </div>
             })
           }
@@ -63,7 +63,7 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
           <h1 className="font-semibold text-lg md:text-2xl border-b pb-8">Order Summary</h1>
           <div className="flex justify-between mt-10 mb-5">
             <span className="font-semibold text-sm uppercase">Items {totalItems()}</span>
-            <span className="font-semibold text-sm">${Math.ceil(totalCost())}</span>
+            <span className="font-semibold text-sm">Rs.{Math.ceil(totalCost()*87)}</span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
@@ -78,10 +78,11 @@ const Cart = ({cart,handleDecrease,handleIncrease,totalItems,handleRemove,totalC
           </div>
           <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase cursor-pointer" onClick={applyPromo}>Apply</button>
           <div className="border-t mt-8">
-            <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+            <div className="flex font-semibold justify-between py-6 text-sm ">
               <span>Total cost</span>
+              
               {
-              promo==="DISCOUNT100" ? (<span>${Math.ceil(Checkoutprice)}</span>):(<span>${Math.ceil(totalCost())}</span>)
+              promo==="DISCOUNT100" ? (<span>Rs.{Math.ceil(Checkoutprice*87)}</span>):(<span>Rs.{Math.ceil(totalCost()*87)}</span>)
               }
 
             </div>

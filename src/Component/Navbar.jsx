@@ -41,7 +41,7 @@ const Navbar = ({totalItems}) => {
                         <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
                         {
                            
-                           (p!==0?<p className='absolute top-2 ml-1 pl-2 pb-3 font-medium sm:block hidden bg-red-500 text-white rounded-xl w-[25px] h-[25px]'>{totalItems()}</p>:"")
+                           (p!==0?<p className='absolute top-2 ml-[4px] pl-2 pb-3 font-medium sm:block hidden bg-red-500 text-white rounded-xl w-[25px] h-[25px]'>{totalItems()}</p>:"")
                         }
                         
                     </Link>
