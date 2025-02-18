@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../Layout/Layout";
 import Filter from "../Filter/Filter";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Allproducts = ({ handleCart }) => {
   const [allProducts, setAllProducts] = useState([]);
@@ -81,7 +82,7 @@ const Allproducts = ({ handleCart }) => {
               placeholder="Search Item"
             />
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              className="bg-blue-600 text-white px-4 font-medium  py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
               onClick={handleSearch}
             >
               Search
@@ -105,7 +106,7 @@ const Allproducts = ({ handleCart }) => {
               placeholder="Maximum Price"
             />
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              className="bg-blue-600 text-white px-4 py-2 font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
               onClick={handleFilter}
             >
               Filter
@@ -123,11 +124,13 @@ const Allproducts = ({ handleCart }) => {
               className="p-5 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105 cursor-pointer"
             >
               <div className="bg-gray-100 p-4 rounded-lg">
-                <img
+               <Link to={`/singleproduct/${item.id}`}>
+               <img
                   alt={item.title}
                   className="rounded-lg h-40 w-full object-cover"
                   src={item.thumbnail}
                 />
+               </Link>
               </div>
 
               <div className="mt-4 text-center">

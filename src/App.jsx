@@ -8,7 +8,9 @@ import Men from './Pages/Men';
 import Kids from './Pages/Kids';
 import Login from './Pages/Login';
 import Sign from './Pages/Sign';
+import SingleProduct from './SingleProducts/Singleproduct';
 import toast, { Toaster } from 'react-hot-toast';
+import Singleproduct from './SingleProducts/SingleProduct';
 
 
 const App = () => {
@@ -130,6 +132,7 @@ const App = () => {
         <Route path='/kids' element={<Kids />} />
         <Route path='/login' element={<Login />} />
         <Route path='/sign' element={<Sign/>}/>
+        <Route path='/singleproduct/:id' element={<Singleproduct handleCart={handleCart}/>}/>
       </Routes>
       <Toaster /> 
     </BrowserRouter>

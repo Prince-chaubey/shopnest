@@ -26,12 +26,13 @@ const Navbar = ({totalItems}) => {
                     <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
                     <li><Link to='/kids' className='hover:text-orange-600'>Kids</Link></li>
                     
+                    
                 </ul>
 
                 {/* Right Side Icons */}
                 <div className='flex items-center gap-2'>
                    <Link to="/login">
-                   <button className='bg-gray-200 px-4 py-1 rounded-md text-lg font-medium hover:bg-gray-300 cursor-pointer'>
+                   <button className='bg-gray-200 px-4 py-1 rounded-md text-lg font-medium hover:bg-gray-300 cursor-pointer sm:block hidden'>
                         Login
                     </button>
                    </Link>
@@ -61,6 +62,7 @@ const Navbar = ({totalItems}) => {
                         <li><Link to='/allproducts' className='block' onClick={toggleNavbar}>All Products</Link></li>
                         <li><Link to='/mens' className='block' onClick={toggleNavbar}>Mens</Link></li>
                         <li><Link to='/kids' className='block' onClick={toggleNavbar}>Kids</Link></li>
+                        <li><Link to='/login' className='hover:text-orange-600' onClick={toggleNavbar}>Login</Link></li>
                     </ul>
                 </div>
             )}
