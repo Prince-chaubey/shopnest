@@ -101,7 +101,7 @@ const App = () => {
     <BrowserRouter>
       <Navbar totalItems={totalItems}/>
       <Routes>
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home handleCart={handleCart}/>} />
         <Route 
           path='/cart' 
           element={
