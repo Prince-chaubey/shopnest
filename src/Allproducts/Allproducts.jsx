@@ -124,13 +124,13 @@ const Allproducts = ({ handleCart }) => {
               className="p-5 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105 cursor-pointer"
             >
               <div className="bg-gray-100 p-4 rounded-lg">
-               <Link to={`/singleproduct/${item.id}`}>
+             
                <img
                   alt={item.title}
                   className="rounded-lg h-40 w-full object-cover"
                   src={item.thumbnail}
                 />
-               </Link>
+             
               </div>
 
               <div className="mt-4 text-center">

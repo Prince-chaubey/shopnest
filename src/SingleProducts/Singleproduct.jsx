@@ -2,23 +2,47 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const SingleProduct = ({handleCart}) => {
+const SingleProduct = ({ handleCart }) => {
     const [product, setProduct] = useState({});
     const { id } = useParams();
+    const [loading, setLoading] = useState(true); // Add loading state
+    const [error, setError] = useState(null); // Add error state
 
     useEffect(() => {
         const getProduct = async () => {
+            setLoading(true); // Set loading to true before fetching
+            setError(null); // Clear previous errors
             const URL = `https://dummyjson.com/products/${id}`;
             try {
                 const res = await axios.get(URL);
-                console.log(res.data);
+                console.log('API Response:', res.data);
                 setProduct(res.data);
-            } catch (error) {
-                console.log('Error while fetching single Product', error);
+                setLoading(false); // Set loading to false after successful fetch
+            } catch (err) {
+                console.error('Error while fetching single Product', err);
+                setError(err); // Set error state
+                setLoading(false); // Set loading to false even in case of error
             }
         };
         getProduct();
     }, [id]);
+
+    if (loading) {
+        return (
+            <div className="py-[105px] px-4 sm:px-8 md:px-16 lg:px-20 bg-gray-100 min-h-screen flex items-center justify-center">
+                <p className="text-center text-gray-600">Loading...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="py-[105px] px-4 sm:px-8 md:px-16 lg:px-20 bg-gray-100 min-h-screen flex items-center justify-center">
+                <p className="text-center text-red-600">Error fetching product. Please try again.</p>
+                <p className="text-center text-red-600">{error.message}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="py-[105px] px-4 sm:px-8 md:px-16 lg:px-20 bg-gray-100 min-h-screen flex items-center justify-center">
@@ -68,7 +92,10 @@ const SingleProduct = ({handleCart}) => {
 
                         {/* Buttons (Reduced Gap) */}
                         <div className="mt-3 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                            <button className="w-full sm:w-1/2 text-white bg-indigo-600 hover:bg-indigo-700 py-3 px-6 rounded-lg font-semibold shadow-lg transition cursor-pointer" onClick={handleCart}>
+                            <button
+                                className="w-full sm:w-1/2 text-white bg-indigo-600 hover:bg-indigo-700 py-3 px-6 rounded-lg font-semibold shadow-lg transition cursor-pointer"
+                                onClick={handleCart}
+                            >
                                 Add to Cart 🛒
                             </button>
                             <button className="w-full sm:w-1/2 text-indigo-600 border border-indigo-600 hover:bg-indigo-100 py-3 px-6 rounded-lg font-semibold shadow-lg transition cursor-pointer">
@@ -78,7 +105,7 @@ const SingleProduct = ({handleCart}) => {
                     </div>
                 </div>
             ) : (
-                <p className="text-center text-gray-600">Loading...</p>
+                <p className="text-center text-gray-600">Product not found.</p>
             )}
         </div>
     );

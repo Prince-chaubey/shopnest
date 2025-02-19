@@ -24,9 +24,8 @@ const Navbar = ({totalItems}) => {
                     <li><Link to='/' className='hover:text-orange-600'>Home</Link></li>
                     <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
                     <li><Link to='/contactus' className='hover:text-orange-600'>Contact Us</Link></li>
-                    <li className='hover:text-orange-600'>Kids</li>
-                    
-                    
+                    <li><Link to='/aboutus' className='hover:text-orange-600'>About Us</Link></li>
+                   
                 </ul>
 
                 {/* Right Side Icons */}
