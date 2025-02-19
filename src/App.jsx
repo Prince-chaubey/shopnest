@@ -4,13 +4,11 @@ import Home from './Home/Home';
 import Navbar from './Component/Navbar';
 import Allproducts from './Allproducts/Allproducts';
 import Cart from './Cart/Cart';
-import Men from './Pages/Men';
-import Kids from './Pages/Kids';
 import Login from './Pages/Login';
 import Sign from './Pages/Sign';
-import SingleProduct from './SingleProducts/Singleproduct';
 import toast, { Toaster } from 'react-hot-toast';
-import Singleproduct from './SingleProducts/SingleProduct';
+import ContactUs from './ContactUs/ContactUs';
+import Singleproduct from "./Allproducts/Allproducts"
 
 
 const App = () => {
@@ -128,8 +126,7 @@ const App = () => {
           path='/allproducts' 
           element={<Allproducts handleCart={handleCart} />} 
         />
-        <Route path='/mens' element={<Men />} />
-        <Route path='/kids' element={<Kids />} />
+        <Route path='/contactus' element={<ContactUs/>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/sign' element={<Sign/>}/>
         <Route path='/singleproduct/:id' element={<Singleproduct handleCart={handleCart}/>}/>

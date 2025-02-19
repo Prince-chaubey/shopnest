@@ -23,8 +23,8 @@ const Navbar = ({totalItems}) => {
                 <ul className='hidden sm:flex text-lg gap-5 font-medium'>
                     <li><Link to='/' className='hover:text-orange-600'>Home</Link></li>
                     <li><Link to='/allproducts' className='hover:text-orange-600'>All Products</Link></li>
-                    <li><Link to='/mens' className='hover:text-orange-600'>Mens</Link></li>
-                    <li><Link to='/kids' className='hover:text-orange-600'>Kids</Link></li>
+                    <li><Link to='/contactus' className='hover:text-orange-600'>Contact Us</Link></li>
+                    <li className='hover:text-orange-600'>Kids</li>
                     
                     
                 </ul>
