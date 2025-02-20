@@ -4,6 +4,7 @@ import Hero from '../Hero/Hero'
 import Gallery from '../Gallery/Gallery'
 import Card from '../Card/Card'
 import PopularProducts from '../PopularProducts/PopularProducts'
+import Testimonial from '../Testimonial/Testimonial'
 
 const Home = ({handleCart}) => {
   return (
@@ -12,6 +13,7 @@ const Home = ({handleCart}) => {
        <Hero/>
        <Card/>
        <PopularProducts handleCart={handleCart}/>
+       <Testimonial/>
        <Gallery/>
        
       </Layout>

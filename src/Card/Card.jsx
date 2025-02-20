@@ -6,7 +6,7 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Card = () => {
   return (
-    <div className="p-10">
+    <div className="px-25 py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
         
         <div className="flex flex-col items-center space-y-3 bg-red-500 p-6 rounded-xl shadow-lg cursor-pointer">
