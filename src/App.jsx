@@ -10,8 +10,21 @@ import toast, { Toaster } from 'react-hot-toast';
 import ContactUs from './ContactUs/ContactUs';
 import Singleproduct from "./Allproducts/Allproducts"
 import AboutUs from "../src/AboutUs/AboutUs"
+import 'flowbite';
 
 
+
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * The App component serves as the main entry point for the application. It manages the state and logic
+ * for the shopping cart, including adding, removing, and adjusting item quantities. It also handles
+ * promotional code application and displays the total cost and number of items in the cart. The component
+ * utilizes React Router for navigation between different pages like Home, Cart, All Products, Contact Us,
+ * About Us, Login, Sign, and a product detail page. Additionally, it integrates a notification system 
+ * using react-hot-toast for user feedback.
+ */
+
+/******  339724c6-8f14-44bf-9c31-061712ad9fa2  *******/
 const App = () => {
   const [cart, setCart] = useState([]);
   const [promo,setPromo]=useState("");

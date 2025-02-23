@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
-import Sign from '../Pages/Sign';
+
 
 const Navbar = ({totalItems}) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
@@ -38,10 +38,10 @@ const Navbar = ({totalItems}) => {
                   
 
                     <Link to='/cart' >
-                        <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 sm:block hidden mt-[2px]' />
+                        <FaCartShopping size={30} className='cursor-pointer hover:text-orange-600 mt-[2px]' />
                         {
                            
-                           (p!==0?<p className='absolute top-2 ml-[4px] pl-2 pb-3 font-medium sm:block hidden bg-red-500 text-white rounded-xl w-[25px] h-[25px]'>{totalItems()}</p>:"")
+                           (p!==0?<p className='absolute top-2 ml-[4px] pl-2 pb-3 font-medium bg-red-500 text-white rounded-xl w-[25px] h-[25px]'>{totalItems()}</p>:"")
                         }
                         
                     </Link>

@@ -6,6 +6,7 @@ import Card from '../Card/Card'
 import PopularProducts from '../PopularProducts/PopularProducts'
 import Testimonial from '../Testimonial/Testimonial'
 
+
 const Home = ({handleCart}) => {
   return (
     <div>
